@@ -8,6 +8,7 @@ from models.base_model import BaseModel
 from models import storage
 import os
 
+
 class Test_base_model(unittest.TestCase):
     """ Tester that checks whetever everything is working as intended """
 
@@ -63,3 +64,8 @@ class Test_base_model(unittest.TestCase):
         self.assertTrue(hasattr(my_base, "created_at"))
         self.assertTrue(hasattr(my_base, "updated_at"))
         self.assertTrue(hasattr(my_base, "__init__"))
+
+    def test_typeofvalues(self):
+        """ test to see if every values is of the correct type """
+        my_base = BaseModel()
+        self.assertEqual(type(my_base.id), str)
