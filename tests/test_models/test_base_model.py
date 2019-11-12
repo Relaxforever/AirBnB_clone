@@ -55,3 +55,11 @@ class Test_base_model(unittest.TestCase):
         self.assertEqual(my_instance.name, instance.name)
         self.assertEqual(my_instance.email, instance.email)
         self.assertTrue(os.path.isfile("file.json"))
+
+    def test_hasattrib(self):
+        """ test if every attribute has been correctly made """
+        my_base = BaseModel()
+        self.assertTrue(hasattr(my_base, "id"))
+        self.assertTrue(hasattr(my_base, "created_at"))
+        self.assertTrue(hasattr(my_base, "updated_at"))
+        self.assertTrue(hasattr(my_base, "__init__"))
