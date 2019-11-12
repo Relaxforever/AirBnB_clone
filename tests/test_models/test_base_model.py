@@ -35,6 +35,13 @@ class Test_base_model(unittest.TestCase):
         self.assertIsNotNone(BaseModel.to_dict.__doc__)
         self.assertIsNotNone(BaseModel.save.__doc__)
 
+    def test_dict(self):
+        """ this checks every value of the normal dict """
+        my_base = BaseModel()
+        my_base_dict = my_base.__dict__
+        self.assertEqual(type(my_base).__name__, "BaseModel")
+        self.assertTrue(hasattr(my_base_dict, "__class__"))
+
     def test_to_dict(self):
         """ Tester to see if the function is correctly documented """
         my_instance = BaseModel()
