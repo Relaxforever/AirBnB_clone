@@ -7,6 +7,7 @@ import pep8
 from models.base_model import BaseModel
 from models import storage
 import os
+import datetime
 
 
 class Test_base_model(unittest.TestCase):
@@ -69,3 +70,5 @@ class Test_base_model(unittest.TestCase):
         """ test to see if every values is of the correct type """
         my_base = BaseModel()
         self.assertEqual(type(my_base.id), str)
+        self.assertEqual(type(my_base.updated_at), datetime.datetime)
+        self.assertEqual(type(my_base.created_at), datetime.datetime)
