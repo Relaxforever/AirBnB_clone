@@ -6,7 +6,7 @@ import unittest
 import pep8
 from models.base_model import BaseModel
 from models import storage
-
+import os
 
 class Test_base_model(unittest.TestCase):
     """ Tester that checks whetever everything is working as intended """
@@ -39,6 +39,7 @@ class Test_base_model(unittest.TestCase):
         my_instance.name = "Betty"
         my_instance.email = "holberton@email.com"
         instance_dict = my_instance.to_dict()
+        self.assertTrue(type(instance_dict) is dict)
         self.assertIn("name", instance_dict.keys())
         self.assertIn("email", instance_dict.keys())
 
@@ -53,3 +54,4 @@ class Test_base_model(unittest.TestCase):
         self.assertEqual(my_instance.id, instance.id)
         self.assertEqual(my_instance.name, instance.name)
         self.assertEqual(my_instance.email, instance.email)
+        self.assertTrue(os.path.isfile("file.json"))
