@@ -13,5 +13,5 @@ class City(BaseModel):
             the name of the city
             """
 
-    state_id=""
-    name=""
+    state_id = ""
+    name = ""
