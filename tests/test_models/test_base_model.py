@@ -5,6 +5,7 @@
 import unittest
 import pep8
 from models.base_model import BaseModel
+from models import storage
 
 
 class Test_base_model(unittest.TestCase):
@@ -31,3 +32,24 @@ class Test_base_model(unittest.TestCase):
         self.assertIsNotNone(BaseModel.__str__.__doc__)
         self.assertIsNotNone(BaseModel.to_dict.__doc__)
         self.assertIsNotNone(BaseModel.save.__doc__)
+
+    def test_to_dict(self):
+        """ Tester to see if the function is correctly documented """
+        my_instance = BaseModel()
+        my_instance.name = "Betty"
+        my_instance.email = "holberton@email.com"
+        instance_dict = my_instance.to_dict()
+        self.assertIn("name", instance_dict.keys())
+        self.assertIn("email", instance_dict.keys())
+
+    def test_save(self):
+        """ Tester to see if the function is correctly documented """
+        my_instance = BaseModel()
+        my_instance.name = "Betty"
+        my_instance.email = "holberton@email.com"
+        my_instance.save()
+        objects = storage.all()
+        instance = objects["BaseModel.{}".format(my_instance.id)]
+        self.assertEqual(my_instance.id, instance.id)
+        self.assertEqual(my_instance.name, instance.name)
+        self.assertEqual(my_instance.email, instance.email)
