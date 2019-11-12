@@ -17,4 +17,5 @@ class Amenity(BaseModel):
             name : str
                 the name of the amenity
                 """
+        self.name = name
         super().__init__(*args, **kwargs)
