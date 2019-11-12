@@ -10,12 +10,4 @@ class Amenity(BaseModel):
         name : str
             the name of the amenity
             """
-
-    def __init__(self, name="", *args, **kwargs):
-        """ Parameters
-            ----------
-            name : str
-                the name of the amenity
-                """
-        self.name = name
-        super().__init__(*args, **kwargs)
+    name = ""
