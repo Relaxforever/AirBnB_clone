@@ -10,6 +10,7 @@ from models.place import Place
 from models.review import Review
 from models import storage
 import json
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -128,6 +129,32 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
+
+    def default(self, line):
+        """ Default """
+        tmp = line.split(".")
+        if tmp[1] == "all()":
+            HBNBCommand.do_all(self, tmp[0])
+        elif tmp[1] == "count()":
+            print(HBNBCommand.count(self, tmp[0]))
+        elif re.search("show", tmp[1]):
+            arg = "".join(tmp).split('"')
+            argument = tmp[0] + " " + arg[1]
+            HBNBCommand.do_show(self, argument)
+        elif re.search("destroy", tmp[1]):
+            arg = "".join(tmp).split('"')
+            argument = tmp[0] + " " + arg[1]
+            HBNBCommand.do_destroy(self, argument)
+
+    def count(self, line):
+        """ Count """
+        counter = 0
+        all_objs = storage.all()
+        for obj_id in all_objs.keys():
+            obj = all_objs[obj_id]
+            if obj.__class__.__name__ == line:
+                    counter += 1
+        return counter
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
