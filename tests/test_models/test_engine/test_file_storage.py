@@ -64,3 +64,11 @@ class Test_file_storage(unittest.TestCase):
         storage.reload()
         storager = storage.all()
         self.assertIsNot(my_us, storager.values())
+
+    def test__objects_exists(self):
+        """ test that objects exist """
+        self.assertTrue(isinstance(storage._FileStorage__objects, dict))
+
+    def test__file_path_exists(self):
+        """ test that path file exist """
+        self.assertTrue(isinstance(storage._FileStorage__file_path, str))
