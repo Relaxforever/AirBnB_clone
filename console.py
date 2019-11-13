@@ -145,6 +145,10 @@ class HBNBCommand(cmd.Cmd):
             arg = "".join(tmp).split('"')
             argument = tmp[0] + " " + arg[1]
             HBNBCommand.do_destroy(self, argument)
+        elif re.search("update", tmp[1]):
+            arg = "".join(tmp).split('"')
+            argument = " ".join([tmp[0], arg[1], arg[3], arg[5]])
+            HBNBCommand.do_update(self, argument)
 
     def count(self, line):
         """ Count """
