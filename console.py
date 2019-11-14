@@ -19,7 +19,8 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def do_quit(self, line):
-        """Quit from the console prompt"""
+        """Quit from the console prompt:
+           (hbnb) quit"""
         return True
 
     def do_EOF(self, line):
@@ -31,7 +32,8 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, line):
-        """Creates a new instance of BaseModel, saves it and print its id"""
+        """Creates a new instance, saves it and print its id
+           (hbnb) create <typeobject>"""
         list_class = ("BaseModel", "User", "State", "City",
                       "Amenity", "Place", "Review")
         if line in list_class:
@@ -44,7 +46,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        """Creates a new instance of BaseModel, saves it and print its id"""
+        """Show a instance:
+           (hbnb) show <typeobject> <idobject>"""
         splitted = line.split()
         list_class = ("BaseModel", "User", "State", "City",
                       "Amenity", "Place", "Review")
@@ -64,7 +67,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """Prints all string representation of all
-            instances based or not on the class name."""
+            instances based or not on the class name.
+           (hbnb) all <typeobject>(optional)"""
         list_class = ("BaseModel", "User", "State", "City",
                       "Amenity", "Place", "Review")
         if line in list_class:
@@ -82,7 +86,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id"""
+        """Deletes an instance based on the class name and id.
+           (hbnb) destroy <typeobject> <idobject>"""
 
         splitted = line.split()
         list_class = ("BaseModel", "User", "State", "City",
@@ -104,7 +109,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """Updates an instance based on the class name
-            and id by adding or updating attribute"""
+            and id by adding or updating attribute
+           (hbnb) update <typeobject> <idobject> <attr name> <attr value>"""
 
         splitted = line.split()
         list_class = ("BaseModel", "User", "State", "City",
@@ -131,8 +137,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def default(self, line):
-        """ Default """
+        """ Default for excecute the commands in advanced tasks."""
         tmp = line.split(".")
+        all_objs = storage.all()
         if tmp[1] == "all()":
             HBNBCommand.do_all(self, tmp[0])
         elif tmp[1] == "count()":
@@ -145,13 +152,29 @@ class HBNBCommand(cmd.Cmd):
             arg = "".join(tmp).split('"')
             argument = tmp[0] + " " + arg[1]
             HBNBCommand.do_destroy(self, argument)
+        elif re.search("{.+}", tmp[1]):
+            arg = tmp[1].split(",")
+            obj_id = arg[0].split("\"")[1]
+
+            for i in arg[1:]:
+                aux = HBNBCommand.string_format(i)
+                aux = [str(element) for element in aux]
+                setattr(all_objs[tmp[0] + "." + obj_id], aux[0], aux[1])
         elif re.search("update", tmp[1]):
             arg = "".join(tmp).split('"')
             argument = " ".join([tmp[0], arg[1], arg[3], arg[5]])
             HBNBCommand.do_update(self, argument)
 
+    @staticmethod
+    def string_format(string):
+        """ Method for format the string in last update"""
+        result = string.replace("{", "").replace(")", "").replace("}", "")
+        result = result.replace('"', "").replace("'", "").replace(" ", "")
+        result = result.split(":")
+        return result
+
     def count(self, line):
-        """ Count """
+        """ Method for count the instances in objects. """
         counter = 0
         all_objs = storage.all()
         for obj_id in all_objs.keys():
