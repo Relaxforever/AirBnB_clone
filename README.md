@@ -27,25 +27,16 @@ and then when you want to start it execute the following command
 ---
 File Name | Description
 --- | ---
-`models/base_model.py` | Base Class that will be used as a father to most
-utility classes
-`models/state.py` | A state class that has the name of the state inherits from
-BaseModel
-`models/city.py` | A city class that has the name of the city, inherits from
-BaseModel
-`models/user.py` | A user class that has all user information, inherits from
-BaseModel
-`models/place.py` | A place class that has all the information about the
-house/apartment/home, inherits from BaseModel
-`models/review.py` | A review class that let's the user leave a review of the
-place, inherits from BaseModel
-`models/amenity.py` | An amenity class that has all amenity information,
-inherits from BaseModel
-`models/engine/file_storage.py` | A class that get's to serialize instances to a
-JSON file and deserializes JSON file to instances
+`models/base_model.py` | Base Class that will be used as a father to most utility classes
+`models/state.py` | A state class that has the name of the state inherits from BaseModel
+`models/city.py` | A city class that has the name of the city, inherits from BaseModel
+`models/user.py` | A user class that has all user information, inherits from BaseModel
+`models/place.py` | A place class that has all the information about the house/apartment/home, inherits from BaseModel
+`models/review.py` | A review class that let's the user leave a review of the place, inherits from BaseModel
+`models/amenity.py` | An amenity class that has all amenity information, inherits from BaseModel
+`models/engine/file_storage.py` | A class that get's to serialize instances to a JSON file and deserializes JSON file to instances
 `tests/test_models/` | The unittest files for all the previous Classes
-`tests/test_models/test_engine/` | Unittest for the way we Storage File/File
-Storager
+`tests/test_models/test_engine/` | Unittest for the way we Storage File/File Storager
 
 ### Usage
 ---
@@ -54,22 +45,16 @@ This interpreter has basic console commands
 
 Command | Syntax | Output
 ------- | ------ | ------
-help | `help *[option]*` | Lists all current avaliable commands, or shows what a
-commands does
+help | `help *[option]*` | Lists all current avaliable commands, or shows what a commands does
 quit | `quit` | Exit command interpreter
 EOF | `EOF` | Exit command interpreter
-create | `create [class_name]` or `[class_name].create()`| Creates an instance
-of the given name class
+create | `create [class_name]` or `[class_name].create()`| Creates an instance of the given name class
 update | `update [class_name] [object_id] [update_key] [update_value]` or
-`[class].update([object_id] [update_key] [update_value]()`| Updates the
-key:value of class_name.object_id instance
-show | `show [class_name] [object_id]` or `[class_name].show([object_id])()` |
-Displays all attributes of class_name.object_id
-all | `all [class_name]`, `[class_name].all()` | Displays every instance of
-class_name, if used without option displays every instance saved to the file
+`[class].update([object_id] [update_key] [update_value]()`| Updates the key:value of class_name.object_id instance
+show | `show [class_name] [object_id]` or `[class_name].show([object_id])()` | Displays all attributes of class_name.object_id
+all | `all [class_name]`, `[class_name].all()` | Displays every instance of class_name, if used without option displays every instance saved to the file
 destroy | `destroy [class_name] [object_id]` or
-`[class_name].destroy([object_id])()` | Deletes all attributes of
-class_name.object_id
+`[class_name].destroy([object_id])()` | Deletes all attributes of class_name.object_id
 ## Example Usage
 ---
 ```python3
@@ -104,5 +89,4 @@ EOF  all  create  destroy  help  quit  show  update
 
 Authors:
 * **Juan Diego Arango Piedrahita** -  [Jdarangop](https://github.com/jdarangop)
-* **Fidel Fernando Caicedo Castaño** -
-* [Relaxforever](https://github.com/Relaxforever)
+* **Fidel Fernando Caicedo Castaño** - [Relaxforever](https://github.com/Relaxforever)
