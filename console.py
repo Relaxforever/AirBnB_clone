@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Console module """
 import cmd
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -8,7 +9,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-from models import storage
 import json
 import re
 
@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
         if len(splitted) == 2:
             if splitted[0] in list_class:
                 try:
-                    all_objs = storage.all()
+                    all_objs = models.storage.all()
                     print(all_objs[splitted[0] + "." + splitted[1]])
                 except:
                     print("** no instance found **")
@@ -72,13 +72,13 @@ class HBNBCommand(cmd.Cmd):
         list_class = ("BaseModel", "User", "State", "City",
                       "Amenity", "Place", "Review")
         if line in list_class:
-            all_objs = storage.all()
+            all_objs = models.storage.all()
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 if obj.__class__.__name__ == line:
                     print(obj)
         elif len(line) == 0:
-            all_objs = storage.all()
+            all_objs = models.storage.all()
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 print(obj)
@@ -95,9 +95,9 @@ class HBNBCommand(cmd.Cmd):
         if len(splitted) == 2:
             if splitted[0] in list_class:
                 try:
-                    all_objs = storage.all()
+                    all_objs = models.storage.all()
                     del all_objs[splitted[0] + "." + splitted[1]]
-                    storage.save()
+                    models.storage.save()
                 except:
                     print("** no instance found **")
             else:
@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
         splitted = line.split()
         list_class = ("BaseModel", "User", "State", "City",
                       "Amenity", "Place", "Review")
-        all_objs = storage.all()
+        all_objs = models.storage.all()
         if len(splitted) == 0:
             print("** class name missing **")
         elif splitted[0] not in list_class:
@@ -132,14 +132,14 @@ class HBNBCommand(cmd.Cmd):
             if splitted[0] + "." + splitted[1] in all_objs.keys():
                 setattr(all_objs[splitted[0] + "." + splitted[1]],
                         splitted[2], splitted[3])
-                storage.save()
+                models.storage.save()
             else:
                 print("** no instance found **")
 
     def default(self, line):
         """ Default for excecute the commands in advanced tasks."""
         tmp = line.split(".")
-        all_objs = storage.all()
+        all_objs = models.storage.all()
         if tmp[1] == "all()":
             HBNBCommand.do_all(self, tmp[0])
         elif tmp[1] == "count()":
@@ -176,7 +176,7 @@ class HBNBCommand(cmd.Cmd):
     def count(self, line):
         """ Method for count the instances in objects. """
         counter = 0
-        all_objs = storage.all()
+        all_objs = models.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
             if obj.__class__.__name__ == line:
